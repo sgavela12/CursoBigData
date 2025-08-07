@@ -1,0 +1,15 @@
+# IntelliJ / Metals / VSCode
+.idea/
+.metals/
+.bloop/
+.vscode/
+.sbt/
+
+# SBT
+target/
+project/project/
+project/target/
+
+# OS
+.DS_Store
+*.log
