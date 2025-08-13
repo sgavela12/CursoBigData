@@ -21,6 +21,7 @@ object BaseDatos {
       case 1 => ejercicio1(spark)
       case 2 => ejercicio2(spark)
       case 3 => ejercicio3(spark)
+      case 4 => ejercicio4(spark)
       case _ => println("Número de ejercicio no válido")
     }
 
@@ -74,7 +75,7 @@ object BaseDatos {
       .show()
   }
 
-// // EJERCICIO 3
+// EJERCICIO 3
 // Para cada ciudad, calcula el total de compras de cada producto por cliente (cantidad * precio).
 
   def ejercicio3(spark: SparkSession): Unit = {
@@ -90,4 +91,23 @@ object BaseDatos {
     resultado.show()
 
   }
+  
+//   EJERCICIO 4: Categorizar productos 
+  // Para cada ciudad, crea una columna rank_cliente que indique el puesto del cliente según su total gastado en esa ciudad.
+  
+
+  def ejercicio4(spark: SparkSession): Unit = {
+
+    val ventas = leeVentas(spark)
+    ventas.withColumn("total_compra", col("cantidad") * col("precio")).groupBy("cliente","ciudad")
+      .agg(sum("total_compra").alias("total_compra"))
+      .withColumn("ranking", rank().over(Window.partitionBy("ciudad").orderBy(desc("total_compra"))))
+      .show()
+    
+   
+
+    val ventana = Window.partitionBy("ciudad").orderBy(desc("total_compra"))
+
+  }
+
 }

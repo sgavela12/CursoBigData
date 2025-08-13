@@ -9,7 +9,7 @@ object Main {
       .getOrCreate()
 
     // primer parametro para cambiar el numero del ejercicio
-    BaseDatos.ejercicios(3,spark)
+    BaseDatos.ejercicios(4,spark)
 
 
 
