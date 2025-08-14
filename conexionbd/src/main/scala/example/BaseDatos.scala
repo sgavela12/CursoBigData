@@ -2,6 +2,7 @@ import org.apache.spark.sql.{DataFrame, SparkSession}
 import org.apache.spark.sql.functions._
 import org.apache.spark.sql.expressions.Window
 
+
 object BaseDatos {
 
   def leerTablaPersonas(spark: SparkSession): Unit = {
@@ -22,6 +23,7 @@ object BaseDatos {
       case 2 => ejercicio2(spark)
       case 3 => ejercicio3(spark)
       case 4 => ejercicio4(spark)
+      case 5 => ejercicio5(spark)
       case _ => println("Número de ejercicio no válido")
     }
 
@@ -105,9 +107,27 @@ object BaseDatos {
       .show()
     
    
-
     val ventana = Window.partitionBy("ciudad").orderBy(desc("total_compra"))
 
   }
+//   Ejercicio 5: Total de ventas por cliente
+    // Usa map para calcular el total de cada venta (cantidad * precio) y asociarlo al cliente.
+    // Usa reduceByKey para sumar todas las ventas por cliente.
+    
+def ejercicio5(spark: SparkSession): Unit = {
+
+  val ventasDF: DataFrame = leeVentas(spark)
+
+  val ventasConTotal = ventasDF.withColumn(
+    "total",
+    col("cantidad") * col("precio").cast("double") 
+  )
+
+  val totalPorClienteAgregado = ventasConTotal
+    .groupBy("cliente")
+    .agg(sum("total").as("total_compra"))
+
+  totalPorClienteAgregado.show()
+}
 
 }

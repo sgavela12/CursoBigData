@@ -1,4 +1,5 @@
 import org.apache.spark.sql.SparkSession
+import example.BankDataset
 
 object Main {
   def main(args: Array[String]): Unit = {
@@ -8,10 +9,8 @@ object Main {
       .master("local[*]")
       .getOrCreate()
 
-    // primer parametro para cambiar el numero del ejercicio
-    BaseDatos.ejercicios(4,spark)
-
-
+    // BaseDatos.leerTabla(spark)
+    BankDataset.ejercicios(3, spark)
 
     spark.stop()
   }
