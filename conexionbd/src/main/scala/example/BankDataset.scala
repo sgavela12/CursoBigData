@@ -67,4 +67,8 @@ val bankDfFiltered = bankDf2.filter(col("total_assets") > 1000)
 
 bankDfFiltered.show()
   }
+  println("esperando 2 segundos para finalizar...")
+  Thread.sleep(10000) 
+  println("finalizado ejercicio 3")
+
 }
