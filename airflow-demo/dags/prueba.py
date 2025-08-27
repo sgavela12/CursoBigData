@@ -3,7 +3,7 @@ from datetime import datetime
 
 @dag(
     start_date=datetime(2025, 8, 26),
-    schedule="* * * * *",  # Todos los días a las 10:00 AM
+    schedule="* * * * *",  # Ejecutar cada minuto
     catchup=False
 )
 def dag_diario():
@@ -21,5 +21,4 @@ def dag_diario():
     resultado = tarea_saludo()
     tarea_siguiente(resultado)
 
-# Instanciamos el DAG
 dag = dag_diario()

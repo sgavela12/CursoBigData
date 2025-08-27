@@ -21,5 +21,4 @@ def dag_pruuuuuuuueba():
     resultado = tarea_saludo()
     tarea_siguiente(resultado)
 
-# Instanciamos el DAG (corregido)
-dag = dag_pruuuuuuuueba()  # Cambia "dag_diario" por "dag_pruuuuuuuueba"
+dag = dag_pruuuuuuuueba()  
