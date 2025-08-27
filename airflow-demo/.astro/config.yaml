@@ -1,0 +1,11 @@
+project:
+  name: airflow-demo
+  airflow_version: 2.7.2
+  python_version: 3.11
+
+airflow:
+  executor: LocalExecutor
+  image: astrocrpublic.azurecr.io/runtime:3.0-9
+  ports:
+    - "5433:5432"  # <--- Cambiado a 5433 en el host
+    - "8080:8080"
