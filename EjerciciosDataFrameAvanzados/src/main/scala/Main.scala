@@ -8,6 +8,8 @@ object Main {
     // rutas
   val userCSV = "data/raw/googleplaystore_user_review.csv"
   val playStoreCSV = "data/raw/googleplaystore.csv"
+  val quijote = "data/raw/el_quijote.txt"
+
 
   val spark = SparkSession
     .builder()
@@ -19,10 +21,10 @@ object Main {
 
   val dfUsers = spark.read.option("header", "true").csv(userCSV)
   val dfPlayStore = spark.read.option("header", "true").csv(playStoreCSV)
-
+  val quijoteRDD = spark.sparkContext.textFile(quijote)
     
 
-    val ejercicio = "4" 
+  val ejercicio = "8" 
 
     ejercicio match {                                                                   
       case "1"   => EjerciciosDataFrame.ejercicio1(dfPlayStore)
@@ -34,6 +36,7 @@ object Main {
       case "6b"  => EjerciciosDataFrame.ejercicio6b(dfPlayStore)
       case "6c"  => EjerciciosDataFrame.ejercicio6c(dfPlayStore)
       case "7"   => EjerciciosDataFrame.ejercicio7(dfPlayStore)
+      case "8"   => LearningSpark2_ejercicios.ejercicioSpark1(quijoteRDD)
       case _     => println(s"Ejercicio '$ejercicio' no reconocido.")
     }
   }
